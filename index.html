@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="grid">
+			<header class="page-header">
+				<div class="content">
+					<ul>
+						<li>hedelmäpeli</li>
+						<li class="credits" style="float: right"></li>
+					</ul>
+				</div>
+			</header>
+			<aside class="page-leftbar">
+				<div class="content"></div>
+			</aside>
+			<aside class="page-rightbar">
+				<div class="content"></div>
+			</aside>
+			<main class="page-main">
+				<div class="content">
+					<div class="slots">
+						<div class="reel-container center">
+							<div class="reel"></div>
+							<div class="reel"></div>
+							<div class="reel"></div>
+							<div class="reel"></div>
+						</div>
+					</div>
+				</div>
+			</main>
+			<div class="page-bottombar">
+				<div class="content">
+					<div class="button-container">
+						<input type="checkbox" id="0" hidden disabled />
+						<label for="0">Lock</label>
+						<input type="checkbox" id="1" hidden disabled />
+						<label for="1">Lock</label>
+						<input type="checkbox" id="2" hidden disabled />
+						<label for="2">Lock</label>
+						<input type="checkbox" id="3" hidden disabled />
+						<label for="3">Lock</label>
+						<input type="button" id="roll" class="roll" value="Roll" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="./script.js"></script>
+	</body>
+</html>
