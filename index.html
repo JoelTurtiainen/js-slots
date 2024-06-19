@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Hedelmäpeli</title>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
@@ -12,6 +12,7 @@
 				<div class="content">
 					<ul>
 						<li>hedelmäpeli</li>
+						<li class="bet" style="float: left">1</li>
 						<li class="credits" style="float: right"></li>
 					</ul>
 				</div>
@@ -37,6 +38,10 @@
 			<div class="page-bottombar">
 				<div class="content">
 					<div class="button-container">
+						<div class="bet-container">
+							<input type="button" id="betUp" value="+ bet" />
+							<input type="button" id="betDown" value="- bet" />
+						</div>
 						<input type="checkbox" id="0" hidden disabled />
 						<label for="0">Lock</label>
 						<input type="checkbox" id="1" hidden disabled />

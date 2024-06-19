@@ -79,14 +79,14 @@ body {
 }
 
 .button-container {
-	padding-left: var(--icon-w);
 	border: 1px solid black;
 	width: calc(5.5 * var(--icon-w));
 	display: flex;
 	gap: 0.9em;
 }
 /* ## Fancy stuff */
-.credits {
+.credits,
+.bet {
 	color: red;
 	background-color: #242424;
 	font-size: 2em;
@@ -132,8 +132,20 @@ label {
 	background-color: var(--orange);
 }
 
-input[type='button'] {
+input[type='button'][class='roll'] {
 	background-color: var(--color-5);
+}
+
+.bet-container {
+	display: flex;
+	flex-direction: column;
+	width: var(--icon-w);
+	gap: 6px;
+}
+.bet-container > input {
+	background-color: var(--color-2);
+	padding: 5px;
+	width: 100%;
 }
 
 /* ## Positioning */
