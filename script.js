@@ -5,15 +5,17 @@ const red = '\x1b[31m',
 
 class Progress {
 	#credits = 10;
-	#round = 0;
 	#bet = 1;
 
 	set bet(val) {
+		// HACK: Make lock buttons unavailable if bet changes
+		toggleBtns(true);
+
 		if (val > 0) {
 			this.#bet = val;
 
 			console.debug(`NEW BET: ${val} mk`);
-			document.querySelector('.bet').innerHTML = this.#bet;
+			document.querySelector('.bet').textContent = this.#bet;
 		}
 	}
 
@@ -24,29 +26,15 @@ class Progress {
 	set credits(val) {
 		const old = this.#credits;
 		this.#credits = val;
-		document.querySelector('.credits').innerHTML = this.#credits;
+		document.querySelector('.credits').textContent = this.#credits;
 
 		if (this.#credits > old) console.debug(`${green}ADDED: ${this.credits - old} mk`);
 		else console.debug(`${red}REMOVED: ${this.credits - old} mk`);
 	}
 
 	get credits() {
-		document.querySelector('.credits').innerHTML = this.#credits;
+		document.querySelector('.credits').textContent = this.#credits;
 		return this.#credits;
-	}
-
-	set round(val) {
-		console.debug;
-		if (val > 1) {
-			this.#round = 0;
-		} else {
-			this.#round = val;
-		}
-		console.debug(`ROUND: ${this.#round}`);
-	}
-
-	get round() {
-		return this.#round;
 	}
 }
 
@@ -89,66 +77,65 @@ const roll = (reel, offset = 0) => {
 
 function rollAll() {
 	const checkboxes = document.querySelectorAll('.button-container > input[type=checkbox]');
+	const rerolled = [...checkboxes].some((element) => element.checked);
 	const reelList = document.querySelectorAll('.reel-container > .reel');
 	const promises = Array.from(reelList, (reel, i) =>
 		checkboxes[i].checked ? Promise.resolve(0) : roll(reel, i),
 	);
 
+	// Disable for duration of the roll
 	document.querySelector('.roll').setAttribute('disabled', true);
 
 	Promise.all(promises).then((deltas) => {
 		deltas.forEach((delta, i) => (indexes[i] = (indexes[i] + delta) % numIcons));
-		checkWin();
-		toggleBtns(checkboxes);
+
+		// Enable Roll button again
+		document.querySelector('.roll').removeAttribute('disabled');
+
+		const result = checkWin();
+
+		if (result > 0) {
+			document.querySelector('.button-container').classList.add('blink');
+			setTimeout(() => document.querySelector('.button-container').classList.remove('blink'), 2000);
+			progress.credits += result;
+		}
+		toggleBtns(rerolled, result);
 	});
 }
 
-function toggleBtns(btnList, result = false) {
-	// Enable
-	document.querySelector('.roll').removeAttribute('disabled');
-
-	// Unselect buttons
-	document.querySelectorAll('input:checked').forEach((input) => (input.checked = false));
-
-	// Disable Buttons
-	if (progress.round > 0 && result === false) {
-		btnList.forEach((btn) => btn.removeAttribute('disabled'));
+function toggleBtns(rerolled = false, result = 0) {
+	const btns = document.querySelectorAll('.button-container > input[type=checkbox]');
+	// Disable / Enable 'Lock' buttons
+	if (rerolled || result > 0) {
+		btns.forEach((btn) => btn.setAttribute('disabled', true));
 	} else {
-		btnList.forEach((btn) => btn.setAttribute('disabled', true));
+		btns.forEach((btn) => btn.removeAttribute('disabled'));
 	}
+	// Uncheck 'Lock' Buttons
+	document.querySelectorAll('input:checked').forEach((input) => (input.checked = false));
 }
 
 function checkWin() {
-	// check win conditions
+	let result = 0;
 	const counts = {};
-
-	console.debug(indexes.map((i) => `${fruits[i].name}`));
-
+	// Turn into dict with counts
 	indexes.forEach((index) => {
 		counts[index] = counts[index] ? counts[index] + 1 : 1;
-		// counts[fruits[index].name] = counts[fruits[index].name] ? counts[fruits[index].name] + 1 : 1;
 	});
 
 	if (Object.values(counts).includes(4)) {
-		progress.credits += Number(fruits[Object.keys(counts)[0]].mult * progress.bet);
+		result = Number(fruits[Object.keys(counts)[0]].mult * progress.bet);
 	} else if (counts['2'] === 3) {
-		progress.credits += Number(fruits[2].mult * (progress.bet / 2));
-	} else {
-		progress.round++;
-		return;
+		result = Number(fruits[2].mult * (progress.bet / 2));
 	}
-
-	document.querySelector('.button-container').classList.add('blink');
-	setTimeout(() => document.querySelector('.button-container').classList.remove('blink'), 2000);
-	progress.round = 0;
-	return;
+	return result;
 }
 
 function onClick(e) {
 	const classes = e.target.classList;
 	// console.log(classes);
 
-	if (classes.contains('roll')) {
+	if (classes.contains('roll') && progress.bet <= progress.credits) {
 		progress.credits -= progress.bet;
 		rollAll();
 	} else if (e.target.id === 'betUp') {
@@ -167,16 +154,14 @@ function init() {
 
 const progress = init();
 
-// addEventListener('keydown', (e) => {
-// 	switch (e.key) {
-// 		case 'q':
-// 			iconMap.forEach((icon, i) => console.log(i, icon));
-// 			//Object.entries(iconMap).forEach(([key, value], index) => console.log(index, key, value));
-// 			break;
-// 		case 'w':
-// 			indexes.forEach((index) => console.log(iconMap[index]));
-// 			break;
-// 		case 'e':
-// 			console.clear();
-// 	}
-// });
+addEventListener('keydown', (e) => {
+	switch (e.key) {
+		case 'q':
+			fruits.forEach((icon, i) => console.log(i, icon));
+			//Object.entries(iconMap).forEach(([key, value], index) => console.log(index, key, value));
+			break;
+		case 'e':
+			console.clear();
+			break;
+	}
+});

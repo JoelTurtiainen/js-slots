@@ -20,14 +20,14 @@ body {
 
 .grid {
 	display: grid;
-	grid-template-columns: auto max-content auto;
-	grid-template-rows: 75px minmax(160px, auto) auto;
+	grid-template-columns: auto 30%;
+	grid-template-rows: 100px minmax(160px, auto) 100px;
 	grid-template-areas:
-		'header header header'
-		'leftbar main rightbar'
-		'leftbar bottombar rightbar';
-	column-gap: 8px;
-	row-gap: 20px;
+		'header header'
+		'main rightbar'
+		'bottombar rightbar';
+	column-gap: 5px;
+	row-gap: 5px;
 }
 
 .page-header {
@@ -38,10 +38,6 @@ body {
 	grid-area: rightbar;
 }
 
-.page-leftbar {
-	grid-area: leftbar;
-}
-
 .page-main {
 	grid-area: main;
 }
@@ -50,9 +46,22 @@ body {
 	grid-area: bottombar;
 }
 
+.flex {
+	display: flex;
+	flex-direction: row;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
 .content {
-	color: #242424;
-	background-color: #7a7979;
+	color: white;
+	background-color: rgb(33, 33, 33);
+	border-radius: 10px;
+	border: 3px solid black;
 	font-weight: 600;
 	text-align: center;
 	box-sizing: border-box;
@@ -85,22 +94,29 @@ body {
 	gap: 0.9em;
 }
 /* ## Fancy stuff */
-.credits,
-.bet {
+
+.betAndCredits {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.1em;
+}
+
+.betAndCredits > div > div {
 	color: red;
-	background-color: #242424;
+	background-color: black;
 	font-size: 2em;
-	padding-inline: 50px;
+	min-width: 150px;
 }
 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+.prizes > li {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 2px rgb(149, 149, 149) dashed;
+	display: flex;
+	align-items: center;
 }
-
-li {
-	display: inline;
+.prizes > li > span {
+	width: 50px;
 }
 
 /* ## Buttons */
@@ -191,26 +207,44 @@ input[type='button'][class='roll'] {
 }
 
 /* ## images */
-.apple {
-	background: url(./res/apple.svg) no-repeat;
-}
-
-.banana {
-	background: url(./res/banana.svg) no-repeat;
-}
-
-.cherry {
-	background: url(./res/cherry.svg) no-repeat;
-}
-
-.melon {
-	background: url(./res/melon.svg) no-repeat;
+i {
+	position: relative;
+	width: 192px;
+	display: block;
+	height: 48px;
+	background-repeat: repeat-x;
 }
 
 .pear {
-	background: url(./res/pear.svg) no-repeat;
+	background: url(./res/pear.svg);
+}
+
+.banana {
+	background: url(./res/banana.svg);
+}
+
+.seven {
+	background: url(./res/seven.svg);
+}
+
+.melon {
+	background: url(./res/melon.svg);
+}
+
+.cherry {
+	background: url(./res/cherry.svg);
+}
+
+.apple {
+	background: url(./res/apple.svg);
 }
 
 .full {
-	background: url(./res/full.svg) no-repeat;
+	background: url(./res/full.svg);
+}
+
+.title {
+	background: url(./res/header.webp);
+	width: 417px;
+	height: 80px;
 }
