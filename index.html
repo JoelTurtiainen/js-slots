@@ -6,69 +6,66 @@
 		<title>Hedelmäpeli</title>
 		<link rel="stylesheet" href="style.css" />
 	</head>
-	<body>
-		<div class="grid">
-			<header class="page-header">
-				<div class="content">
-					<i class="title center"></i>
-				</div>
-			</header>
-			<aside class="page-rightbar">
-				<div class="content" style="color: white">
-					<ul class="prizes">
-						<li><span>x 10</span><i class="seven"></i></li>
-						<li><span>x 7</span><i class="banana"></i></li>
-						<li><span>x 6</span><i class="apple"></i></li>
-						<li><span>x 5</span><i class="seven" style="width: 144px"></i></li>
-						<li><span>x 5</span><i class="melon"></i></li>
-						<li><span>x 4</span><i class="pear"></i></li>
-						<li><span>x 3</span><i class="cherry"></i></li>
-					</ul>
-				</div>
-			</aside>
-			<main class="page-main">
-				<div class="content">
-					<div class="slots">
-						<div class="betAndCredits">
-							<div>
-								<div class="bet">1</div>
-								Bet
-							</div>
-							<div>
-								<div class="credits">10</div>
-								Credits
-							</div>
-						</div>
-						<div class="reel-container center">
-							<div class="reel"></div>
-							<div class="reel"></div>
-							<div class="reel"></div>
-							<div class="reel"></div>
-						</div>
+	<body class="grid">
+		<header class="page-header">
+			<div class="content flex-center">
+				<i lang="fi" class="title center" alt="Title"></i>
+			</div>
+		</header>
+		<aside class="page-rightbar">
+			<div class="content">
+				<ul class="prizes">
+					<li><span>x 10</span><i class="seven-4"></i></li>
+					<li><span>x 7</span><i class="banana"></i></li>
+					<li><span>x 6</span><i class="apple"></i></li>
+					<li><span>x 5</span><i class="seven-3"></i></li>
+					<li><span>x 5</span><i class="melon"></i></li>
+					<li><span>x 4</span><i class="pear"></i></li>
+					<li><span>x 3</span><i class="cherry"></i></li>
+				</ul>
+			</div>
+		</aside>
+		<main class="page-main">
+			<div class="content">
+				<div class="displays">
+					<div class="display-bet">
+						<p></p>
+						<p>Bet</p>
+					</div>
+					<div class="display-win">
+						<p></p>
+						<p>Win</p>
+					</div>
+					<div class="display-credits">
+						<p></p>
+						<p>Coins</p>
 					</div>
 				</div>
-			</main>
-			<div class="page-bottombar">
-				<div class="content">
-					<div class="button-container center">
-						<div class="bet-container">
-							<input type="button" id="betUp" value="+ bet" />
-							<input type="button" id="betDown" value="- bet" />
-						</div>
-						<input type="checkbox" id="0" hidden disabled />
-						<label for="0">Lock</label>
-						<input type="checkbox" id="1" hidden disabled />
-						<label for="1">Lock</label>
-						<input type="checkbox" id="2" hidden disabled />
-						<label for="2">Lock</label>
-						<input type="checkbox" id="3" hidden disabled />
-						<label for="3">Lock</label>
-						<input type="button" id="roll" class="roll" value="Roll" />
+				<div class="slots flex-center">
+					<div class="reel-container flex-center border-neon">
+						<div class="reel border-neon"></div>
+						<div class="reel border-neon"></div>
+						<div class="reel border-neon"></div>
+						<div class="reel border-neon"></div>
 					</div>
 				</div>
 			</div>
+		</main>
+		<div class="page-bottombar">
+			<div class="content">
+				<div class="btn-panel flex-center">
+					<div class="bet-actions">
+						<button class="btn bet-up arrow" tabindex="0" aria-label="Increase Bet"></button>
+						<button class="btn bet-down arrow flip" tabindex="0" aria-label="Decrease Bet"></button>
+					</div>
+					<button class="toggle-btn btn" aria-pressed="false" aria-label="Lock Reel One" disabled>Lock</button>
+					<button class="toggle-btn btn" aria-pressed="false" aria-label="Lock Reel Two" disabled>Lock</button>
+					<button class="toggle-btn btn" aria-pressed="false" aria-label="Lock Reel Three" disabled>Lock</button>
+					<button class="toggle-btn btn" aria-pressed="false" aria-label="Lock Reel Four" disabled>Lock</button>
+					<button class="roll btn" aria-label="Roll">Roll</button>
+				</div>
+			</div>
 		</div>
-
 		<script src="./script.js"></script>
 	</body>
 </html>

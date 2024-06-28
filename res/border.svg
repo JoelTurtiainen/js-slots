@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="81" height="81" version="1.1" viewBox="0 0 81 81" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <filter id="b" x="-.032848" y="-.033181" width="1.0657" height="1.0664" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.75745977"/>
+  </filter>
+ </defs>
+ <g stroke-linecap="round" stroke-linejoin="round">
+  <use filter="url(#b)" stroke="#00d4aa" stroke-width="1.5" xlink:href="#a"/>
+  <use stroke="#55ffdd" stroke-width="1.2" xlink:href="#a"/>
+  <use stroke="#aaffee" stroke-width=".6" xlink:href="#a"/>
+ </g>
+ <g id="a" transform="matrix(.99983 0 0 1.0184 .0070597 -.74644)">
+  <rect x="1.4081" y="2.3001" width="78.184" height="76.4" fill="none"/>
+ </g>
+</svg>
